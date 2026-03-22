@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import React, { useState } from "react"
 import {
   Home,
   BarChart3,
@@ -259,7 +259,7 @@ export default function Dashboard() {
                   <AvatarImage src="/logo-basilica.png" />
                 </Avatar>
               </div>
-              <span className="font-semibold text-gray-900 text-xl">HolyCall</span>
+              <span className="font-bold  text-2xl tracking-wide">HolyCall</span>
             </div>
           </div>
 

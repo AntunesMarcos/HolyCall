@@ -1,12 +1,19 @@
 "use client"
 
-import type React from "react"
-
+import React, { useState } from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { Search, Bell, Home, Workflow, BarChart3, Settings, Users, Database, ArrowRight } from "lucide-react"
+import {
+  Home,
+  BarChart3,
+  Settings,
+  Users,
+  Plus,
+  FolderSearch,
+  Menu,
+  X,
+} from "lucide-react"
 import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import {
   DropdownMenu,
@@ -17,13 +24,13 @@ import {
   DropdownMenuLabel,
 } from "@/components/ui/dropdown-menu"
 
-const navigation = [
-  { name: "Overview", href: "/", icon: Home },
-  { name: "Workflows", href: "/workflows", icon: Workflow },
-  { name: "Analytics", href: "/analytics", icon: BarChart3 },
-  { name: "Templates", href: "/templates", icon: Database },
-  { name: "Team", href: "/team", icon: Users },
-  { name: "Settings", href: "/settings", icon: Settings },
+const navItems = [
+  { href: "/home", icon: Home, label: "Início" },
+  { href: "/attendance", icon: Plus, label: "Registrar Chamada" },
+  { href: "/attendance/consultar", icon: FolderSearch, label: "Consultar Chamada" },
+  { href: "/team", icon: Users, label: "Turmas" },
+  { href: "/analytics", icon: BarChart3, label: "Relatórios" },
+  { href: "/settings", icon: Settings, label: "Configurações" },
 ]
 
 interface DashboardLayoutProps {
@@ -32,36 +39,33 @@ interface DashboardLayoutProps {
 
 export function DashboardLayout({ children }: DashboardLayoutProps) {
   const pathname = usePathname()
+  const [sidebarOpen, setSidebarOpen] = useState(false)
 
   return (
-    <div className="min-h-screen bg-white">
-      {/* Header */}
-      <header className="h-16 border-b border-gray-200 bg-white px-6 flex items-center justify-between">
-        <div className="flex items-center gap-4">
-          <div className="flex items-center gap-2">
-            <div className="w-8 h-8 bg-gradient-to-br from-purple-600 to-blue-600 rounded-lg flex items-center justify-center">
-              <Workflow className="w-4 h-4 text-white" />
-            </div>
-            <span className="font-semibold text-gray-900">Emmanuel</span>
-          </div>
-          <div className="text-sm text-gray-500">
-            <span>Dashboard</span> <span className="mx-1">/</span>
-            <span className="capitalize">{pathname === "/" ? "Overview" : pathname.slice(1)}</span>
-          </div>
-        </div>
+      <div className="h-screen flex flex-col bg-white">
 
-        <div className="flex items-center gap-4">
-          <div className="relative">
-            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
-            <Input
-              placeholder="Search workflows, logs..."
-              className="pl-10 w-80 bg-gray-50 border-gray-200 focus:bg-white"
-            />
+        {/* Header */}
+        <header className="h-16 border-b border-gray-200 bg-white px-4 md:px-6 flex items-center justify-between flex-shrink-0 z-30">
+          <div className="flex items-center gap-2 md:gap-4">
+            <Button
+                variant="ghost"
+                size="icon"
+                className="md:hidden"
+                onClick={() => setSidebarOpen(true)}
+            >
+              <Menu className="w-16 h-16" />
+            </Button>
+
+            <div className="flex items-center gap-2">
+              <div className="w-8 h-8 md:w-10 md:h-10 rounded-lg flex items-center justify-center">
+                <Avatar className="w-full h-full">
+                  <AvatarImage src="/logo-basilica.png" />
+                </Avatar>
+              </div>
+              <span className="font-bold text-2xl tracking-wide">HolyCall</span>
+            </div>
           </div>
-          <Button variant="ghost" size="icon" className="relative">
-            <Bell className="w-4 h-4" />
-            <span className="absolute -top-1 -right-1 w-2 h-2 bg-red-500 rounded-full"></span>
-          </Button>
+
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button variant="ghost" size="icon">
@@ -74,55 +78,69 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
             <DropdownMenuContent align="end" className="w-56">
               <DropdownMenuLabel>Alex Evans</DropdownMenuLabel>
               <DropdownMenuSeparator />
-              <DropdownMenuItem>Profile</DropdownMenuItem>
-              <DropdownMenuItem>Settings</DropdownMenuItem>
-              <DropdownMenuItem>Support</DropdownMenuItem>
+              <DropdownMenuItem>Perfil</DropdownMenuItem>
+              <DropdownMenuItem>Configurações</DropdownMenuItem>
+              <DropdownMenuItem>Suporte</DropdownMenuItem>
               <DropdownMenuSeparator />
-              <DropdownMenuItem>Sign out</DropdownMenuItem>
+              <DropdownMenuItem asChild>
+                <Link href="/login" className="w-full cursor-pointer text-red-600">
+                  Sair
+                </Link>
+              </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
-        </div>
-      </header>
+        </header>
 
-      <div className="flex">
-        {/* Sidebar */}
-        <aside className="w-60 border-r border-gray-200 bg-white h-[calc(100vh-4rem)] overflow-y-auto">
-          <div className="p-4">
-            <div className="relative mb-6">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
-              <Input placeholder="Search anything..." className="pl-10 bg-gray-50 border-gray-200 text-sm" />
-              <Button
-                size="icon"
-                variant="ghost"
-                className="absolute right-1 top-1/2 transform -translate-y-1/2 w-6 h-6"
-              >
-                <ArrowRight className="w-3 h-3" />
-              </Button>
+        {/* Overlay mobile */}
+        {sidebarOpen && (
+            <div
+                className="fixed inset-0 bg-black/40 z-40 md:hidden"
+                onClick={() => setSidebarOpen(false)}
+            />
+        )}
+
+        <div className="flex flex-1 overflow-hidden">
+
+          {/* Sidebar */}
+          <aside className={`
+          fixed top-0 left-0 z-50 md:static md:z-auto
+          w-64 md:w-60 h-full md:h-full
+          border-r border-gray-200 bg-white flex-shrink-0
+          transition-transform duration-300 ease-in-out
+          ${sidebarOpen ? "translate-x-0" : "-translate-x-full md:translate-x-0"}
+        `}>
+            <div className="p-4">
+              <div className="flex justify-end mb-2 md:hidden">
+                <Button variant="ghost" size="icon" onClick={() => setSidebarOpen(false)}>
+                  <X className="w-5 h-5" />
+                </Button>
+              </div>
+              <nav className="space-y-1">
+                {navItems.map(({ href, icon: Icon, label }) => (
+                    <Link
+                        key={href}
+                        href={href}
+                        onClick={() => setSidebarOpen(false)}
+                        className={`flex items-center w-full justify-start px-3 py-2 rounded-md text-sm font-medium transition-colors
+                    ${pathname === href
+                            ? "bg-purple-50 text-purple-700 hover:bg-purple-100"
+                            : "text-gray-600 hover:bg-gray-50"
+                        }`}
+                    >
+                      <Icon className="w-4 h-4 mr-3 flex-shrink-0" />
+                      {label}
+                    </Link>
+                ))}
+              </nav>
             </div>
+          </aside>
 
-            <nav className="space-y-1">
-              {navigation.map((item) => {
-                const isActive = pathname === item.href
-                return (
-                  <Link
-                    key={item.name}
-                    href={item.href}
-                    className={`flex items-center w-full justify-start px-3 py-2 rounded-md text-sm font-medium transition-colors ${
-                      isActive ? "bg-purple-50 text-purple-700 hover:bg-purple-100" : "text-gray-600 hover:bg-gray-50"
-                    }`}
-                  >
-                    <item.icon className="w-4 h-4 mr-3" />
-                    {item.name}
-                  </Link>
-                )
-              })}
-            </nav>
-          </div>
-        </aside>
+          {/* Main Content */}
+          <main className="flex-1 overflow-y-auto p-4 md:p-8 bg-gray-50 min-w-0">
+            {children}
+          </main>
 
-        {/* Main Content */}
-        <main className="flex-1 p-8 bg-gray-50">{children}</main>
+        </div>
       </div>
-    </div>
   )
 }
