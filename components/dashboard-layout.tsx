@@ -3,9 +3,12 @@
 import React, { useState } from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
+
 import {
   Home,
   BarChart3,
+  School,
+  GraduationCap,
   Settings,
   Users,
   Plus,
@@ -28,8 +31,8 @@ const navItems = [
   { href: "/home", icon: Home, label: "Início" },
   { href: "/attendance", icon: Plus, label: "Registrar Chamada" },
   { href: "/attendance/consultar", icon: FolderSearch, label: "Consultar Chamada" },
-  { href: "/team", icon: Users, label: "Turmas" },
-  { href: "/analytics", icon: BarChart3, label: "Relatórios" },
+  { href: "/team", icon: School, label: "Turmas" },
+  { href: "/students", icon: Users, label: "Alunos" },
   { href: "/settings", icon: Settings, label: "Configurações" },
 ]
 
