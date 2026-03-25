@@ -201,9 +201,11 @@ const navItems = [
   { href: "/home", icon: Home, label: "Início" },
   { href: "/attendance", icon: Plus, label: "Registrar Chamada" },
   { href: "/attendance/consultar", icon: FolderSearch, label: "Consultar Chamada" },
+  {href: "/cadastroTurma", icon:School, label: "Cadastro de Turma" },
   { href: "/team", icon: School, label: "Turmas" },
   { href: "/students", icon: Users, label: "Alunos" },
   { href: "/settings", icon: Settings, label: "Configurações" },
+
 ]
 
 export default function Dashboard() {
@@ -344,55 +346,75 @@ export default function Dashboard() {
                 </div>
               </div>
 
-              {/* Quick Action Cards */}
+              {/* Quick Action Cards (Transformados em Links) */}
               <div className="grid grid-cols-1 sm:grid-cols-4 gap-3 md:gap-4 mb-6 md:mb-8">
-                <Card className="p-4 md:p-6 hover:shadow-md transition-shadow cursor-pointer border-gray-200">
-                  <div className="flex items-center gap-3 md:gap-4">
-                    <div className="w-10 h-10 md:w-12 md:h-12 bg-green-100 rounded-lg flex items-center justify-center flex-shrink-0">
-                      <Plus className="w-5 h-5 md:w-6 md:h-6 text-green-600" />
+                <Link href="/attendance" className="block focus:outline-none focus:ring-2 focus:ring-purple-500 rounded-xl">
+                  <Card className="p-4 md:p-6 hover:shadow-md transition-shadow cursor-pointer border-gray-200 h-full">
+                    <div className="flex items-center gap-3 md:gap-4">
+                      <div className="w-10 h-10 md:w-12 md:h-12 bg-green-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                        <Plus className="w-5 h-5 md:w-6 md:h-6 text-green-600" />
+                      </div>
+                      <div>
+                        <h3 className="font-medium text-gray-900 text-sm md:text-base">Registrar Chamada</h3>
+                        <p className="text-xs md:text-sm text-gray-500">Registre a presença de hoje</p>
+                      </div>
                     </div>
-                    <div>
-                      <h3 className="font-medium text-gray-900 text-sm md:text-base">Registrar Chamada</h3>
-                      <p className="text-xs md:text-sm text-gray-500">Registre a presença de hoje</p>
-                    </div>
-                  </div>
-                </Card>
+                  </Card>
+                </Link>
 
-                <Card className="p-4 md:p-6 hover:shadow-md transition-shadow cursor-pointer border-gray-200">
-                  <div className="flex items-center gap-3 md:gap-4">
-                    <div className="w-10 h-10 md:w-12 md:h-12 bg-blue-100 rounded-lg flex items-center justify-center flex-shrink-0">
-                      <FolderSearch className="w-5 h-5 md:w-6 md:h-6 text-blue-600" />
+                <Link href="/attendance/consultar" className="block focus:outline-none focus:ring-2 focus:ring-purple-500 rounded-xl">
+                  <Card className="p-4 md:p-6 hover:shadow-md transition-shadow cursor-pointer border-gray-200 h-full">
+                    <div className="flex items-center gap-3 md:gap-4">
+                      <div className="w-10 h-10 md:w-12 md:h-12 bg-blue-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                        <FolderSearch className="w-5 h-5 md:w-6 md:h-6 text-blue-600" />
+                      </div>
+                      <div>
+                        <h3 className="font-medium text-gray-900 text-sm md:text-base">Consultar Chamada</h3>
+                        <p className="text-xs md:text-sm text-gray-500">Veja o histórico de presenças</p>
+                      </div>
                     </div>
-                    <div>
-                      <h3 className="font-medium text-gray-900 text-sm md:text-base">Consultar Chamada</h3>
-                      <p className="text-xs md:text-sm text-gray-500">Veja o histórico de presenças</p>
-                    </div>
-                  </div>
-                </Card>
+                  </Card>
+                </Link>
 
-                <Card className="p-4 md:p-6 hover:shadow-md transition-shadow cursor-pointer border-gray-200">
-                  <div className="flex items-center gap-3 md:gap-4">
-                    <div className="w-10 h-10 md:w-12 md:h-12 bg-orange-100 rounded-lg flex items-center justify-center flex-shrink-0">
-                      <School className="w-5 h-5 md:w-6 md:h-6 text-orange-600" />
+                <Link href="/cadastroTurma" className="block focus:outline-none focus:ring-2 focus:ring-purple-500 rounded-xl">
+                  <Card className="p-4 md:p-6 hover:shadow-md transition-shadow cursor-pointer border-gray-200 h-full">
+                    <div className="flex items-center gap-3 md:gap-4">
+                      <div className="w-10 h-10 md:w-12 md:h-12 bg-orange-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                        <School className="w-5 h-5 md:w-6 md:h-6 text-orange-600" />
+                      </div>
+                      <div>
+                        <h3 className="font-medium text-gray-900 text-sm md:text-base">Cadastrar Turma</h3>
+                        <p className="text-xs md:text-sm text-gray-500">Adicione ou gerencie turmas</p>
+                      </div>
                     </div>
-                    <div>
-                      <h3 className="font-medium text-gray-900 text-sm md:text-base">Cadastrar Turma</h3>
-                      <p className="text-xs md:text-sm text-gray-500">Adicione ou gerencie turmas</p>
+                  </Card>
+                </Link>
+                <Link href="/cadastroProfessor" className="block focus:outline-none focus:ring-2 focus:ring-purple-500 rounded-xl">
+                  <Card className="p-4 md:p-6 hover:shadow-md transition-shadow cursor-pointer border-gray-200 h-full">
+                    <div className="flex items-center gap-3 md:gap-4">
+                      <div className="w-10 h-10 md:w-12 md:h-12 bg-teal-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                        <Users className="w-5 h-5 md:w-6 md:h-6 text-teal-600" />
+                      </div>
+                      <div>
+                        <h3 className="font-medium text-gray-900 text-sm md:text-base">Cadastrar Professores</h3>
+                        <p className="text-xs md:text-sm text-gray-500">Adicione ou gerencie professores</p>
+                      </div>
                     </div>
-                  </div>
-                </Card>
-
-                <Card className="p-4 md:p-6 hover:shadow-md transition-shadow cursor-pointer border-gray-200">
-                  <div className="flex items-center gap-3 md:gap-4">
-                    <div className="w-10 h-10 md:w-12 md:h-12 bg-teal-100 rounded-lg flex items-center justify-center flex-shrink-0">
-                      <Users className="w-5 h-5 md:w-6 md:h-6 text-teal-600" />
+                  </Card>
+                </Link>
+                <Link href="/students" className="block focus:outline-none focus:ring-2 focus:ring-purple-500 rounded-xl">
+                  <Card className="p-4 md:p-6 hover:shadow-md transition-shadow cursor-pointer border-gray-200 h-full">
+                    <div className="flex items-center gap-3 md:gap-4">
+                      <div className="w-10 h-10 md:w-12 md:h-12 bg-teal-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                        <Users className="w-5 h-5 md:w-6 md:h-6 text-teal-600" />
+                      </div>
+                      <div>
+                        <h3 className="font-medium text-gray-900 text-sm md:text-base">Cadastrar Alunos</h3>
+                        <p className="text-xs md:text-sm text-gray-500">Adicione ou gerencie alunos</p>
+                      </div>
                     </div>
-                    <div>
-                      <h3 className="font-medium text-gray-900 text-sm md:text-base">Cadastrar Alunos</h3>
-                      <p className="text-xs md:text-sm text-gray-500">Adicione ou gerencie alunos</p>
-                    </div>
-                  </div>
-                </Card>
+                  </Card>
+                </Link>
               </div>
             </div>
 
