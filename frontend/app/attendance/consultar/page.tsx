@@ -353,7 +353,7 @@ export default function ConsultAttendancePage() {
                   <Users className="w-8 h-8 text-purple-400" />
                 </div>
                 <h3 className="text-lg font-medium text-gray-900 mb-1">Selecione uma turma</h3>
-                <p className="text-sm text-gray-500">Escolha uma turma nos filtros acima para consultar o histórico.</p>
+                <p className="text-sm text-gray-500 text-center">Escolha uma turma nos filtros acima para consultar o histórico.</p>
               </div>
           )}
 

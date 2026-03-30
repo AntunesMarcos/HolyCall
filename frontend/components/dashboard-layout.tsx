@@ -31,8 +31,7 @@ const navItems = [
   { href: "/home", icon: Home, label: "Início" },
   { href: "/attendance", icon: Plus, label: "Registrar Chamada" },
   { href: "/attendance/consultar", icon: FolderSearch, label: "Consultar Chamada" },
-  { href: "/team", icon: School, label: "Turmas" },
-  { href: "/students", icon: Users, label: "Alunos" },
+  { href: "/team", icon: Users, label: "Turmas e Alunos" },
   { href: "/settings", icon: Settings, label: "Configurações" },
 ]
 

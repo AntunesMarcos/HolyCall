@@ -9,7 +9,7 @@ import {
   Check,
   Filter,
   Users,
-  ChevronDown,
+  ChevronDown, Save,
 } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
@@ -132,7 +132,7 @@ export default function AttendancePage() {
           {turmaSelecionada ? (
               <>
                 {/* ── Cards de resumo ── */}
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-2">
                   <Card className="border-gray-200">
                     <CardContent className="p-6">
                       <div className="flex items-center gap-3">
@@ -245,6 +245,7 @@ export default function AttendancePage() {
                   </CardContent>
                   <div className="flex justify-end p-4 border-t border-gray-100">
                     <Button className="bg-purple-600 hover:bg-purple-700 gap-2">
+                      <Save className="w-4 h-4" />
                       Salvar Chamada
                     </Button>
                   </div>
@@ -252,15 +253,14 @@ export default function AttendancePage() {
               </>
           ) : (
               /* ── Estado vazio ── */
-              <div className="flex flex-col items-center justify-center py-24 text-center">
-                <div className="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mb-4">
+              <div className="flex flex-col items-center justify-center py-32 border-2 border-dashed border-gray-200 rounded-xl bg-gray-50/30 mt-8">
+                <div className="w-16 h-16 bg-purple-50 rounded-full flex items-center justify-center mb-4">
                   <Users className="w-8 h-8 text-purple-400" />
                 </div>
-                <h3 className="text-lg font-medium text-gray-900 mb-1">Nenhuma turma selecionada</h3>
-                <p className="text-sm text-gray-500">Selecione uma turma acima para iniciar o registro de chamada.</p>
+                <h3 className="text-lg font-medium text-gray-900 mb-1">Selecione uma turma</h3>
+                <p className="text-sm text-gray-500 text-center">Selecione uma turma acima para iniciar o registro de chamada.</p>
               </div>
           )}
-
         </div>
       </DashboardLayout>
   )
